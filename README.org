@@ -5,3 +5,9 @@
 This repository contains solutions to some of the [[https://leetcode.com/contest/][Leetcode]] contests. It is assumed that reader has gone through the problem statements before reading explanations; otherwise some wordings or reference to variable(s) may  not make sense. 
 
 *Note* : Solutions are posted only after the contest has ended.
+
+* TABLE OF CONTENTS
+- Weekly Contests
+  - [[file:Weekly-354.org][Contest-354]]
+- Biweekly Contests
+- Practice
