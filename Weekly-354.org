@@ -1,0 +1,64 @@
+#+title: Weekly Contest 354
+#+date: <2023-08-05 Sat>
+
+* 2778. Sum of Squares of Special Elements
+To solve this problem, simply do what is asked. Keep adding the sum of squares of all *special* elements.
+
+#+begin_src cpp :tangle ./sol.h :noweb yes
+  class Solution {
+  public:
+    int sumOfSquares(vector<int>& arr) {
+      int n = (int) arr.size();
+      int sum = 0;
+      for (int i = 1; i <= n; i++) {
+        if (n % i == 0) {
+          sum += arr[i - 1] * arr[i - 1];
+        } 
+      }
+      return sum;
+    }
+  };
+#+end_src
+
+* 2779. Maximum Beauty of an Array After Applying Operation
+Use ~sweep line~ algorithm. Imagine a line with starting and an ending point by modifying ~nums[i]~. i.e starting point = ~nums[i]-k~, ending point = ~nums[i]+k~. Use a boolean to identify the starting and ending points of this line. Sort these lines based on the starting position. Now, find the point where maximum overlapping is happening. This can be done by scanning the points in order and maintain a counter. If an endpoint is encountered, decrement the counter else increment it. The maximum value attained by counter during this process shows the maximum overlap of lines.
+
+#+name: b
+#+begin_src cpp
+  class Solution {
+  public:
+    int maximumBeauty(vector<int>& nums, int k) {
+      int n = (int) nums.size();
+      vector <pair <int, bool> > p(2 * n);
+      for (int i = 0; i < n; i++) {
+        p[i] = make_pair(nums[i] - k, false);
+        p[n + i] = make_pair(nums[i] + k, true);
+      }
+      sort(p.begin(), p.end(), [&](auto &a, auto &b) {
+        if (a.first == b.first) {
+          if (a.second == b.second) {
+            return false;      // for equivalent point, return false
+          } 
+          return b.second;
+        }
+        return a.first < b.first;
+      });
+
+      int ans = 0;
+      int cnt = 0;
+      for (auto &pr: p) {
+        if (pr.second) {
+          cnt--;
+        } else {
+          cnt++;
+        }
+        ans = max(ans, cnt);
+      }
+      return ans;
+    }
+  };
+
+#+end_src
+
+* 
+* 
