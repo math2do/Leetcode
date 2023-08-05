@@ -1,4 +1,5 @@
-#+title: Weekly Contest 354
+#+title: [[https://leetcode.com/contest/weekly-contest-354/][Weekly Contest 354]]
+#+author: Mathura Tudu
 #+date: <2023-08-05 Sat>
 
 
