@@ -1,0 +1,5 @@
+#+title: Leetcode
+#+author: Mathura Tudu
+#+date: <2023-08-05 Sat>
+
+This repository contains solutions to some of the [[https://leetcode.com/contest/][Leetcode]] contests. It is assumed that reader has gone through the problem statement before reading explanations; otherwise some wordings or reference to variable(s) may  not make sense.
