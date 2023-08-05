@@ -2,6 +2,6 @@
 #+author: Mathura Tudu
 #+date: <2023-08-05 Sat>
 
-This repository contains solutions to some of the [[https://leetcode.com/contest/][Leetcode]] contests. It is assumed that reader has gone through the problem statements before reading explanations; otherwise some wordings or reference to variable(s) may  not make sense.
+This repository contains solutions to some of the [[https://leetcode.com/contest/][Leetcode]] contests. It is assumed that reader has gone through the problem statements before reading explanations; otherwise some wordings or reference to variable(s) may  not make sense. 
 
-_Note_ : *Solutions are posted only after the contest has ended.*
+*Note* : Solutions are posted only after the contest has ended.
