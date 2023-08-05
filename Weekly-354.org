@@ -2,7 +2,7 @@
 #+date: <2023-08-05 Sat>
 
 * 2778. Sum of Squares of Special Elements
-To solve this problem, simply do what is asked. Keep adding the sum of squares of all *special* elements.
+To solve this problem, simply do what is asked. Keep adding the sum of squares of all *special* elements. Number at ~i-th~ position is said to be special if ~n%i == 0~
 
 #+begin_src cpp :tangle ./sol.h :noweb yes
   class Solution {
@@ -21,7 +21,7 @@ To solve this problem, simply do what is asked. Keep adding the sum of squares o
 #+end_src
 
 * 2779. Maximum Beauty of an Array After Applying Operation
-Use ~sweep line~ algorithm. Imagine a line with starting and an ending point by modifying ~nums[i]~. i.e starting point = ~nums[i]-k~, ending point = ~nums[i]+k~. Use a boolean to identify the starting and ending points of this line. Sort these lines based on the starting position. Now, find the point where maximum overlapping is happening. This can be done by scanning the points in order and maintain a counter. If an endpoint is encountered, decrement the counter else increment it. The maximum value attained by counter during this process shows the maximum overlap of lines.
+Use ~line sweep algorithm~. Imagine horizontal lines with starting and an ending point derived from ~nums~. i.e ith line have starting point = ~nums[i]-k~, ending point = ~nums[i]+k~. Use a boolean to identify the starting and ending point of a line. Sort these points based on the position. Now, find the point where maximum overlapping between lines is happening (Imagine a vertical line which cuts through most of the lines). This can be found by scanning the points in order and maintain a counter. If an endpoint is encountered, decrement the counter else increment it. The maximum value attained by counter during this process shows the maximum overlap of lines.
 
 #+name: b
 #+begin_src cpp
