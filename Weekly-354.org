@@ -1,13 +1,13 @@
 #+title: [[https://leetcode.com/contest/weekly-contest-354/][Weekly Contest 354]]
 #+author: Mathura Tudu
 #+date: <2023-08-05 Sat>
-
+#+property: header-args:cpp :tangle ./sol.h :main no
 
 [[https://leetcode.com/contest/weekly-contest-354/problems/sum-of-squares-of-special-elements/][2778. Sum of Squares of Special Elements]]
 
 To solve this problem, simply do what is asked. Keep adding the sum of squares of all *special* elements. Number at ~i-th~ position is said to be special if ~n%i == 0~
 
-#+begin_src cpp :tangle ./sol.h :noweb yes
+#+begin_src cpp
   class Solution {
   public:
     int sumOfSquares(vector<int>& arr) {
@@ -28,7 +28,6 @@ To solve this problem, simply do what is asked. Keep adding the sum of squares o
 
 Use ~line sweep algorithm~. Imagine horizontal lines with starting and an ending point derived from ~nums~. i.e ~i-th~ line have starting point = ~nums[i]-k~, ending point = ~nums[i]+k~. Use a boolean to identify the starting and ending point of a line. Sort these points based on the position. Now, find the point where maximum overlapping between lines is happening (Imagine a vertical line which cuts through most of the lines). This can be found by scanning the points in order and maintain a counter. If an endpoint is encountered, decrement the counter else increment it. The maximum value attained by counter during this process shows the maximum overlap of lines.
 
-#+name: b
 #+begin_src cpp
   class Solution {
   public:
@@ -62,6 +61,45 @@ Use ~line sweep algorithm~. Imagine horizontal lines with starting and an ending
       return ans;
     }
   };
-
 #+end_src
 
+
+[[https://leetcode.com/contest/weekly-contest-354/problems/minimum-index-of-a-valid-split/][2780. Minimum Index of a Valid Split]]
+First find the dominant element of the array, ~nums~. By definition, there can only be one dominant element. The same element will be the dominant element in both arrays after split. So first get this dominant element by storing the frequency of array elements in ~map~. Now we can try to split the array at index ~i~ starting from index 0, 1, 2 ... and so on. While we are at index ~i~, calculate the frequency of dominant element in both left and right side of split. If this element dominants both left and right array, we've found the answer, return ~i~
+
+#+begin_src cpp
+  class Solution {
+  public:
+    int minimumIndex(vector<int>& nums) {
+      int n = (int) nums.size();
+      map <int, int> mp;
+      for (int v : nums) {
+        mp[v]++;
+      }
+
+      int cnt = 0;
+      int ele = -1;
+      for (auto pr : mp) {
+        if (pr.second > cnt) {
+          cnt = pr.second;
+          ele = pr.first;
+        }
+      }
+
+      int lcnt = 0;
+      // ele is the dominant element
+      for (int i = 0; i <= n - 2; i++) {
+        if (nums[i] == ele) {
+          lcnt++;
+          cnt--;
+        }
+
+        // nums[0...i] contains lcnt dominant elements, right of split contains cnt dominant element
+        if ((lcnt * 2 > (i + 1)) && (cnt * 2 > (n - i - 1))) {
+          return i;
+        }
+      }
+      return -1;
+    }
+  };
+#+end_src
