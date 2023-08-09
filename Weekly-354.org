@@ -65,6 +65,7 @@ Use ~line sweep algorithm~. Imagine horizontal lines with starting and an ending
 
 
 [[https://leetcode.com/contest/weekly-contest-354/problems/minimum-index-of-a-valid-split/][2780. Minimum Index of a Valid Split]]
+
 First find the dominant element of the array, ~nums~. By definition, there can only be one dominant element. The same element will be the dominant element in both arrays after split. So first get this dominant element by storing the frequency of array elements in ~map~. Now we can try to split the array at index ~i~ starting from index 0, 1, 2 ... and so on. While we are at index ~i~, calculate the frequency of dominant element in both left and right side of split. If this element dominants both left and right array, we've found the answer, return ~i~
 
 #+begin_src cpp
