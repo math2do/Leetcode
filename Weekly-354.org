@@ -107,8 +107,8 @@ First find the dominant element of the array, ~nums~. By definition, there can o
 
 
 [[https://leetcode.com/contest/weekly-contest-354/problems/length-of-the-longest-valid-substring/][2781. Length of the Longest Valid Substring]]
-=word[i-j]= : Substring of ~word~ from index i to j (inclusive)
 
+=word[i-j]= : Substring of ~word~ from index i to j (inclusive)
 Since the length of ~forbidden~ word is ~<= 10~, we can try to generate all substrings of length atmost ~10~ and check if they are forbidden. If a substring is forbidden that can't be part of answer. We'll generate substrings starting from index ~i~, so substrings generated at worst case will be of form ~word[i:j]~ where ~i <= j <= i+10~. If we find that ~word[i:j]~ forms a forbidden word we know for sure answer can't contain this substring, but substring ~word[i..j-1]~ can still be part of answer. So we update the answer. What if all substrings starting from ~i~ are not forbidden? To handle such cases we maintain index ~r~ to signify the region ~word[i..r]~ doesn't have any forbidden substings. This ~r~ needs to be updated whenever a substring ~word[i-j]~ contains forbidden word. Iterate ~i~ from ~word.length-1~ till ~0~.
 
 
