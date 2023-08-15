@@ -104,3 +104,56 @@ First find the dominant element of the array, ~nums~. By definition, there can o
     }
   };
 #+end_src
+
+
+[[https://leetcode.com/contest/weekly-contest-354/problems/length-of-the-longest-valid-substring/][2781. Length of the Longest Valid Substring]]
+=word[i-j]= : Substring of ~word~ from index i to j (inclusive)
+
+Since the length of ~forbidden~ word is ~<= 10~, we can try to generate all substrings of length atmost ~10~ and check if they are forbidden. If a substring is forbidden that can't be part of answer. We'll generate substrings starting from index ~i~, so substrings generated at worst case will be of form ~word[i:j]~ where ~i <= j <= i+10~. If we find that ~word[i:j]~ forms a forbidden word we know for sure answer can't contain this substring, but substring ~word[i..j-1]~ can still be part of answer. So we update the answer. What if all substrings starting from ~i~ are not forbidden? To handle such cases we maintain index ~r~ to signify the region ~word[i..r]~ doesn't have any forbidden substings. This ~r~ needs to be updated whenever a substring ~word[i-j]~ contains forbidden word. Iterate ~i~ from ~word.length-1~ till ~0~.
+
+
+#+begin_src cpp
+  class Solution {
+  public:
+    int longestValidSubstring(string word, vector<string>& forbidden) {
+      set <string> st;
+      int max_len = 0; // can be upto 10 in some cases
+      for (string w : forbidden) {
+        max_len = max(max_len, (int) w.length());
+        st.insert(w);
+      }
+
+      auto isForbidden = [&](int from, int to) {
+        string sub = word.substr(from, to - from + 1);
+        auto it = st.find(sub);
+        return it != st.end();
+      };
+
+      int len = (int) word.length();
+      int i = len - 1;
+      // maintain a index r, meaning range [i-r] doesn't contain any substrings which are forbidden.
+      int r = len - 1;
+      int ans = 0;
+      while (i >= 0) {
+        int j = i;
+        int upto = min(i + max_len - 1, r);
+        while (j <= upto && !isForbidden(i, j)) {
+          j++;
+        }
+
+        // if there is invalid substr in [i-upto], then j <= upto
+        if (j <= upto) {
+          j--;
+          ans = max(ans, j - i + 1);
+          r = j;
+        } else {
+          ans = max(ans, r - i + 1);
+        }
+        i--;
+      }
+
+      return ans;
+    }
+  };
+#+end_src
+
